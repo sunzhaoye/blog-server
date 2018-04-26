@@ -1,0 +1,27 @@
+{
+    "apps": [{
+        "name": "blog-cms-node",
+        "script": "app.js",
+        "env": {
+            "COMMON_VARIABLE": "true"
+        },
+        "env_production": {
+            "NODE_ENV": "production"
+        }
+    }],
+    "deploy": {
+        "production": {
+            "user": "blog_manage",
+            "host": ["47.93.225.112"],
+            "port": "19999",
+            "ref": "origin/master",
+            "repo": "git@gitee.com:linghuxuhuan/blog-cms-node.git",
+            "path": "/www/website/production",
+            "ssh_options": "StrictHostKeyChecking=no",
+            "post-deploy": "cnpm install && pm2 startOrRestart ecosystem.json --env production",
+            "env": {
+                "NODE_ENV": "production"
+            }
+        }
+    }
+}
